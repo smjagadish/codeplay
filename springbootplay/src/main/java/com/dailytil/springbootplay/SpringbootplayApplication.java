@@ -1,10 +1,14 @@
 package com.dailytil.springbootplay;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 @SpringBootApplication
@@ -12,11 +16,15 @@ public class SpringbootplayApplication {
 
 
 	public static void main(String[] args) {
+
 		ApplicationContext ctx = SpringApplication.run(SpringbootplayApplication.class, args);
+
 		Test obj = ctx.getBean(Test.class);
-System.out.println(obj.type+" "+obj.upgradeable+" "+obj.version);
-System.out.println(obj.printInfo());
-obj.updatedep();
+		System.out.println(obj.type+" "+obj.upgradeable+" "+obj.version);
+        System.out.println(obj.printInfo());
+        obj.updatedep();
+configFeed data = ctx.getBean(configFeed.class);
+System.out.println(data.isBc() + " " + data.getType() + " " + data.getVersion());
 
 	}
 	@Component
@@ -26,8 +34,8 @@ obj.updatedep();
 		@Value("${deployment.upgradeable}")
 		 private boolean upgradeable;
 		@Value("${deployment.version}")
-		 private final int version = 23;
-		@Autowired
+		 private  int version ;
+	//	@Autowired
 		public SecondTest st;
 		Test(@Value("${deployment.version}")int a , final SecondTest stt)
 		{
@@ -44,6 +52,11 @@ System.out.println(this.type);
 			st.upgradeable = false;
 			System.out.println("updated" + st.upgradeable);
 		}
+		@Autowired
+		private void setSecondTest(final SecondTest st)
+		{
+           this.st = st;
+		}
 
 	}
 
@@ -53,6 +66,16 @@ System.out.println(this.type);
 		private boolean upgradeable;
 		@Value("${deployment.version}")
 		private int version;
+
+	}
+	@Configuration
+	@Data
+	@NoArgsConstructor
+    @ConfigurationProperties(prefix="upgrade")
+	public class configFeed{
+		private int version;
+		private String type;
+		private boolean bc;
 
 	}
 }
