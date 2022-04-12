@@ -25,10 +25,13 @@ public class SpringbootplayApplication {
         obj.updatedep();
 configFeed data = ctx.getBean(configFeed.class);
 System.out.println(data.isBc() + " " + data.getType() + " " + data.getVersion());
+System.out.println(obj.cf.getCfst().version);
 
 	}
 	@Component
 	public class Test{
+		@Autowired
+		private configFeed cf;
 		@Value("${deployment.type}")
 		 private  String type;
 		@Value("${deployment.upgradeable}")
@@ -40,7 +43,8 @@ System.out.println(data.isBc() + " " + data.getType() + " " + data.getVersion())
 		Test(@Value("${deployment.version}")int a , final SecondTest stt)
 		{
 System.out.println(this.type);
-//st.upgradeable = false;
+this.st = stt;
+st.upgradeable = false;
 		}
 		private boolean printInfo()
 		{
@@ -49,7 +53,7 @@ System.out.println(this.type);
 		}
 		private void updatedep()
 		{
-			st.upgradeable = false;
+		//	st.upgradeable = false;
 			System.out.println("updated" + st.upgradeable);
 		}
 		@Autowired
@@ -76,6 +80,8 @@ System.out.println(this.type);
 		private int version;
 		private String type;
 		private boolean bc;
+		@Autowired
+		private SecondTest cfst;
 
 	}
 }
