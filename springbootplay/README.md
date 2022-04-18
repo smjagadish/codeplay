@@ -14,6 +14,12 @@
    -  Setter injection is better off than field injection but still behind constructor injection
        * dependency  construction is typically AFTER the constriction of referring object 
        * uses setters to set the dependency 
-       * one of the options to have immutable dependencies
        * to check further on cyclic dependencies part 
        * fits nicely within unit test framework
+
+* Autowired rules 
+
+  - only one constructor with autowired required = true permitted at all times 
+  - either all constructors must have autowired required = false or have only one constructor in entire class with autowired set as either true or false 
+  - if the class itself has only 1 constructor, autowired is optional
+

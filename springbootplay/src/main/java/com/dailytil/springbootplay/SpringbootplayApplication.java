@@ -39,12 +39,22 @@ System.out.println(obj.cf.getCfst().version);
 		@Value("${deployment.version}")
 		 private  int version ;
 	//	@Autowired
-		public SecondTest st;
+		public final SecondTest st;
+
+
+	    @Autowired 
 		Test(@Value("${deployment.version}")int a , final SecondTest stt)
 		{
 System.out.println(this.type);
 this.st = stt;
 st.upgradeable = false;
+		}
+	//	@Autowired(required = false)
+		Test(@Value("${deployment.version}")int a )
+		{
+			this.st = null;
+			System.out.println(this.type);
+
 		}
 		private boolean printInfo()
 		{
@@ -56,10 +66,10 @@ st.upgradeable = false;
 		//	st.upgradeable = false;
 			System.out.println("updated" + st.upgradeable);
 		}
-		@Autowired
+		//@Autowired
 		private void setSecondTest(final SecondTest st)
 		{
-           this.st = st;
+        //  this.st = st;
 		}
 
 	}
