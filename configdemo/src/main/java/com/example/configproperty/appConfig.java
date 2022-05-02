@@ -28,6 +28,9 @@ public class appConfig {
 
     private configProperty shoppingcart;
 
+    @Autowired
+
+    private relatedparty relatedparty;
 
 
 }
