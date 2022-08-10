@@ -42,14 +42,18 @@ System.out.println(obj.cf.getCfst().version);
 		public final SecondTest st;
 
 
-	    @Autowired 
+	  //  @Autowired
 		Test(@Value("${deployment.version}")int a , final SecondTest stt)
 		{
 System.out.println(this.type);
 this.st = stt;
 st.upgradeable = false;
 		}
-	//	@Autowired(required = false)
+		Test(final SecondTest stt)
+		{
+this.st =stt;
+		}
+		@Autowired(required = false)
 		Test(@Value("${deployment.version}")int a )
 		{
 			this.st = null;

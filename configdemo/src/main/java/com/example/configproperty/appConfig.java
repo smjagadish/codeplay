@@ -10,13 +10,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotNull;
 
 @Data
+@Validated
 @Configuration
 
 //@NoArgsConstructor
 
-public class appConfig {
+ public class appConfig {
 
 
 
@@ -29,7 +33,7 @@ public class appConfig {
     private configProperty shoppingcart;
 
     @Autowired
-
+    @NotNull
     private relatedparty relatedparty;
 
 
